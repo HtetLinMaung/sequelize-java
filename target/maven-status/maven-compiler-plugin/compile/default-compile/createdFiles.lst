@@ -1,0 +1,16 @@
+com/starless/QueryResult$QueryResultBuilder.class
+com/starless/FindAndCountResult.class
+com/starless/QueryOptions.class
+com/starless/FindOptions.class
+com/starless/App.class
+com/starless/FindOrCreateResult.class
+com/starless/FindOptions$FindOptionsBuilder.class
+com/starless/CreateOptions$CreateOptionsBuilder.class
+com/starless/ICallBack.class
+com/starless/FindAndCountResult$FindAndCountResultBuilder.class
+com/starless/FindOrCreateResult$FindOrCreateResultBuilder.class
+com/starless/QueryResult.class
+com/starless/QueryOptions$QueryOptionsBuilder.class
+com/starless/Sequelize.class
+com/starless/ITransCb.class
+com/starless/CreateOptions.class
