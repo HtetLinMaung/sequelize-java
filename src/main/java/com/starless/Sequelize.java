@@ -562,12 +562,12 @@ public class Sequelize {
         });
     }
 
-    public int countSync(String table) throws SQLException {
+    public long countSync(String table) throws SQLException {
         return countSync(table, FindOptions.builder().build());
     }
 
-    public int countSync(String table, FindOptions options) throws SQLException {
-        return (int) findOneSync(table, FindOptions.builder()
+    public long countSync(String table, FindOptions options) throws SQLException {
+        return (long) findOneSync(table, FindOptions.builder()
                 .select(Arrays.asList("count(*) as count"))
                 .limit(0)
                 .offset(0)
@@ -578,11 +578,11 @@ public class Sequelize {
                 .build()).get().get("count");
     }
 
-    public CompletableFuture<Integer> count(String table) {
+    public CompletableFuture<Long> count(String table) {
         return count(table, FindOptions.builder().build());
     }
 
-    public CompletableFuture<Integer> count(String table, FindOptions options) {
+    public CompletableFuture<Long> count(String table, FindOptions options) {
         return CompletableFuture.supplyAsync(() -> {
             try {
                 return countSync(table, options);
@@ -706,7 +706,7 @@ public class Sequelize {
             throws SQLException {
         boolean oldAutoClose = autoclose;
         setAutoclose(false);
-        int count = countSync(table, options);
+        long count = countSync(table, options);
         List<Map<String, Object>> rows = findAllSync(table, options, icb);
         if (oldAutoClose) {
             closeConnection();

@@ -11,7 +11,7 @@ import lombok.Data;
 @Builder
 public class FindAndCountResult {
     @Builder.Default
-    private int count = 0;
+    private long count = 0;
     @Builder.Default
     private List<Map<String, Object>> rows = new ArrayList<>();
 }
