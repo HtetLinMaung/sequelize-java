@@ -567,7 +567,7 @@ public class Sequelize {
     }
 
     public long countSync(String table, FindOptions options) throws SQLException {
-        return (long) findOneSync(table, FindOptions.builder()
+        return Long.parseLong(String.valueOf(findOneSync(table, FindOptions.builder()
                 .select(Arrays.asList("count(*) as count"))
                 .limit(0)
                 .offset(0)
@@ -575,7 +575,7 @@ public class Sequelize {
                 .defaults(options.getDefaults())
                 .truncate(options.isTruncate())
                 .group(options.getGroup())
-                .build()).get().get("count");
+                .build()).get().get("count")));
     }
 
     public CompletableFuture<Long> count(String table) {
