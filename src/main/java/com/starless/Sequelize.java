@@ -66,7 +66,7 @@ public class Sequelize {
         System.out.println(sql);
         try (PreparedStatement stmt = connection.prepareStatement(sql);) {
             String lsql = sql.toLowerCase();
-            if (lsql.contains("select") && !lsql.contains("insert")) {
+            if (lsql.contains("select") && !lsql.contains("insert") && !lsql.contains("update")) {
                 List<Map<String, Object>> datalist = new ArrayList<>();
                 int i = 1;
                 for (Object value : options.getBind()) {
