@@ -65,9 +65,9 @@ public class Sequelize {
     public QueryResult querySync(String sql, QueryOptions options, ICallBack icb) throws SQLException {
         System.out.println(sql);
         try (PreparedStatement stmt = connection.prepareStatement(sql);) {
-            String lsql = sql.toLowerCase();
-            if (lsql.contains("select") && !lsql.contains("insert") && !lsql.contains("update")
-                    && !lsql.contains("delete")) {
+            String lsql = sql.toLowerCase().trim();
+            if (lsql.contains("select") && !lsql.startsWith("insert") && !lsql.startsWith("update")
+                    && !lsql.startsWith("delete")) {
                 List<Map<String, Object>> datalist = new ArrayList<>();
                 int i = 1;
                 for (Object value : options.getBind()) {
