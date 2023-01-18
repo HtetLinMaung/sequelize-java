@@ -141,9 +141,9 @@ public class Sequelize {
         for (Entry<String, Object> entry : where.entrySet()) {
             if (entry.getKey().equals("$or")) {
                 List<Map<String, Object>> orList = (List<Map<String, Object>>) entry.getValue();
-                conditions.add(orList.stream()
+                conditions.add("(" + orList.stream()
                         .map(m -> "(" + getWhereConditions(m, options, entry.getKey()) + ")")
-                        .collect(Collectors.joining(" or ")));
+                        .collect(Collectors.joining(" or ")) + ")");
             } else if (entry.getKey().equals("$not")) {
                 List<Map<String, Object>> notList = (List<Map<String, Object>>) entry.getValue();
                 conditions.add("not (" + notList.stream()
