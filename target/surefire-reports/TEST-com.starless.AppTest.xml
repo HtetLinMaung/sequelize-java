@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.starless.AppTest" time="0.062" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.starless.AppTest" time="0.042" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="gopherProxySet" value="false"/>
     <property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit"/>
@@ -7,7 +7,7 @@
     <property name="java.specification.version" value="1.8"/>
     <property name="sun.cpu.isalist" value=""/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
-    <property name="java.class.path" value="/Users/htetlinmaung/Documents/reuseable/maven/sequelize/target/test-classes:/Users/htetlinmaung/Documents/reuseable/maven/sequelize/target/classes:/Users/htetlinmaung/.m2/repository/org/projectlombok/lombok/1.18.24/lombok-1.18.24.jar:/Users/htetlinmaung/.m2/repository/junit/junit/4.11/junit-4.11.jar:/Users/htetlinmaung/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:"/>
+    <property name="java.class.path" value="/Users/htetlinmaung/Documents/reuseable/maven/sequelize-java/target/test-classes:/Users/htetlinmaung/Documents/reuseable/maven/sequelize-java/target/classes:/Users/htetlinmaung/.m2/repository/org/projectlombok/lombok/1.18.24/lombok-1.18.24.jar:/Users/htetlinmaung/.m2/repository/junit/junit/4.11/junit-4.11.jar:/Users/htetlinmaung/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:"/>
     <property name="java.vm.vendor" value="AdoptOpenJDK"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.vendor.url" value="https://adoptopenjdk.net/"/>
@@ -17,21 +17,21 @@
     <property name="user.country" value="MM"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre/lib"/>
-    <property name="sun.java.command" value="/Users/htetlinmaung/Documents/reuseable/maven/sequelize/target/surefire/surefirebooter4952533663557004187.jar /Users/htetlinmaung/Documents/reuseable/maven/sequelize/target/surefire 2023-01-18T15-55-41_556-jvmRun1 surefire8949896440576730342tmp surefire_06480345129598676903tmp"/>
+    <property name="sun.java.command" value="/Users/htetlinmaung/Documents/reuseable/maven/sequelize-java/target/surefire/surefirebooter3063866512513466604.jar /Users/htetlinmaung/Documents/reuseable/maven/sequelize-java/target/surefire 2023-04-29T12-26-30_301-jvmRun1 surefire1699087542564302422tmp surefire_07718025788645161301tmp"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
-    <property name="surefire.test.class.path" value="/Users/htetlinmaung/Documents/reuseable/maven/sequelize/target/test-classes:/Users/htetlinmaung/Documents/reuseable/maven/sequelize/target/classes:/Users/htetlinmaung/.m2/repository/org/projectlombok/lombok/1.18.24/lombok-1.18.24.jar:/Users/htetlinmaung/.m2/repository/junit/junit/4.11/junit-4.11.jar:/Users/htetlinmaung/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:"/>
+    <property name="surefire.test.class.path" value="/Users/htetlinmaung/Documents/reuseable/maven/sequelize-java/target/test-classes:/Users/htetlinmaung/Documents/reuseable/maven/sequelize-java/target/classes:/Users/htetlinmaung/.m2/repository/org/projectlombok/lombok/1.18.24/lombok-1.18.24.jar:/Users/htetlinmaung/.m2/repository/junit/junit/4.11/junit-4.11.jar:/Users/htetlinmaung/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="/Users/htetlinmaung"/>
     <property name="user.language" value="en"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="java.home" value="/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre"/>
-    <property name="basedir" value="/Users/htetlinmaung/Documents/reuseable/maven/sequelize"/>
+    <property name="basedir" value="/Users/htetlinmaung/Documents/reuseable/maven/sequelize-java"/>
     <property name="file.separator" value="/"/>
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.awt.graphicsenv" value="sun.awt.CGraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="/Users/htetlinmaung/Documents/reuseable/maven/sequelize/target/surefire/surefirebooter4952533663557004187.jar"/>
+    <property name="surefire.real.class.path" value="/Users/htetlinmaung/Documents/reuseable/maven/sequelize-java/target/surefire/surefirebooter3063866512513466604.jar"/>
     <property name="sun.boot.class.path" value="/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre/classes"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
@@ -47,7 +47,7 @@
     <property name="java.vendor.url.bug" value="https://github.com/AdoptOpenJDK/openjdk-support/issues"/>
     <property name="java.io.tmpdir" value="/var/folders/q1/b8g_767n64vf_bsw33g7rt5r0000gn/T/"/>
     <property name="java.version" value="1.8.0_292"/>
-    <property name="user.dir" value="/Users/htetlinmaung/Documents/reuseable/maven/sequelize"/>
+    <property name="user.dir" value="/Users/htetlinmaung/Documents/reuseable/maven/sequelize-java"/>
     <property name="os.arch" value="x86_64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
     <property name="java.awt.printerjob" value="sun.lwawt.macosx.CPrinterJob"/>
@@ -61,5 +61,5 @@
     <property name="java.class.version" value="52.0"/>
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
   </properties>
-  <testcase name="shouldAnswerWithTrue" classname="com.starless.AppTest" time="0.002"/>
+  <testcase name="shouldAnswerWithTrue" classname="com.starless.AppTest" time="0.001"/>
 </testsuite>

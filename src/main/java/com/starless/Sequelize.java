@@ -23,6 +23,10 @@ public class Sequelize {
     private final Connection connection;
     private boolean autoclose = true;
 
+    public Sequelize(Connection connection) {
+        this.connection = connection;
+    }
+
     public Sequelize(String url) throws SQLException {
         connection = DriverManager.getConnection(url);
     }
