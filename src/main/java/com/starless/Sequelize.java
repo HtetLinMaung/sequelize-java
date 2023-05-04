@@ -14,6 +14,7 @@ import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
 import java.util.stream.Collectors;
 
 import lombok.Data;
@@ -21,18 +22,34 @@ import lombok.Data;
 @Data
 public class Sequelize {
     private final Connection connection;
-    private boolean autoclose = true;
+    private boolean autoclose = false;
+    private ExecutorService executor = null;
 
     public Sequelize(Connection connection) {
         this.connection = connection;
+    }
+
+    public Sequelize(Connection connection, ExecutorService executor) {
+        this.connection = connection;
+        this.executor = executor;
     }
 
     public Sequelize(String url) throws SQLException {
         connection = DriverManager.getConnection(url);
     }
 
+    public Sequelize(String url, ExecutorService executor) throws SQLException {
+        connection = DriverManager.getConnection(url);
+        this.executor = executor;
+    }
+
     public Sequelize(String url, String username, String password) throws SQLException {
         connection = DriverManager.getConnection(url, username, password);
+    }
+
+    public Sequelize(String url, String username, String password, ExecutorService excuetor) throws SQLException {
+        connection = DriverManager.getConnection(url, username, password);
+        this.executor = excuetor;
     }
 
     public void closeConnection() throws SQLException {
@@ -48,14 +65,25 @@ public class Sequelize {
     }
 
     public CompletableFuture<QueryResult> query(String sql, QueryOptions options, ICallBack icb) {
-        return CompletableFuture.supplyAsync(() -> {
-            try {
-                return querySync(sql, options, icb);
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw new RuntimeException(e);
-            }
-        });
+        if (executor == null) {
+            return CompletableFuture.supplyAsync(() -> {
+                try {
+                    return querySync(sql, options, icb);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new RuntimeException(e);
+                }
+            });
+        } else {
+            return CompletableFuture.supplyAsync(() -> {
+                try {
+                    return querySync(sql, options, icb);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new RuntimeException(e);
+                }
+            }, executor);
+        }
     }
 
     public QueryResult querySync(String sql) throws SQLException {
@@ -252,14 +280,25 @@ public class Sequelize {
     }
 
     public CompletableFuture<List<Map<String, Object>>> findAll(String table, FindOptions options, ICallBack icb) {
-        return CompletableFuture.supplyAsync(() -> {
-            try {
-                return findAllSync(table, options, icb);
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw new RuntimeException(e);
-            }
-        });
+        if (executor == null) {
+            return CompletableFuture.supplyAsync(() -> {
+                try {
+                    return findAllSync(table, options, icb);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new RuntimeException(e);
+                }
+            });
+        } else {
+            return CompletableFuture.supplyAsync(() -> {
+                try {
+                    return findAllSync(table, options, icb);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new RuntimeException(e);
+                }
+            }, executor);
+        }
     }
 
     public CompletableFuture<List<Map<String, Object>>> findAll(String table, FindOptions options) {
@@ -333,14 +372,25 @@ public class Sequelize {
 
     public CompletableFuture<Map<String, Object>> create(String table, Map<String, Object> data, String pk,
             CreateOptions options) {
-        return CompletableFuture.supplyAsync(() -> {
-            try {
-                return createSync(table, data, pk, options);
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw new RuntimeException(e);
-            }
-        });
+        if (executor == null) {
+            return CompletableFuture.supplyAsync(() -> {
+                try {
+                    return createSync(table, data, pk, options);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new RuntimeException(e);
+                }
+            });
+        } else {
+            return CompletableFuture.supplyAsync(() -> {
+                try {
+                    return createSync(table, data, pk, options);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new RuntimeException(e);
+                }
+            }, executor);
+        }
     }
 
     public FindOrCreateResult findOrCreateSync(String table, FindOptions options) throws SQLException {
@@ -383,14 +433,25 @@ public class Sequelize {
 
     public CompletableFuture<FindOrCreateResult> findOrCreate(String table,
             FindOptions options, String pk) {
-        return CompletableFuture.supplyAsync(() -> {
-            try {
-                return findOrCreateSync(table, options, pk);
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw new RuntimeException(e);
-            }
-        });
+        if (executor == null) {
+            return CompletableFuture.supplyAsync(() -> {
+                try {
+                    return findOrCreateSync(table, options, pk);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new RuntimeException(e);
+                }
+            });
+        } else {
+            return CompletableFuture.supplyAsync(() -> {
+                try {
+                    return findOrCreateSync(table, options, pk);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new RuntimeException(e);
+                }
+            }, executor);
+        }
     }
 
     public List<Map<String, Object>> bulkCreateSync(String table, List<Map<String, Object>> datalist)
@@ -448,14 +509,25 @@ public class Sequelize {
 
     public CompletableFuture<List<Map<String, Object>>> bulkCreate(String table,
             List<Map<String, Object>> datalist, String pk, CreateOptions options) {
-        return CompletableFuture.supplyAsync(() -> {
-            try {
-                return bulkCreateSync(table, datalist, pk, options);
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw new RuntimeException(e);
-            }
-        });
+        if (executor == null) {
+            return CompletableFuture.supplyAsync(() -> {
+                try {
+                    return bulkCreateSync(table, datalist, pk, options);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new RuntimeException(e);
+                }
+            });
+        } else {
+            return CompletableFuture.supplyAsync(() -> {
+                try {
+                    return bulkCreateSync(table, datalist, pk, options);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new RuntimeException(e);
+                }
+            }, executor);
+        }
     }
 
     public List<Map<String, Object>> updateSync(String table, Map<String, Object> data) throws SQLException {
@@ -519,14 +591,25 @@ public class Sequelize {
 
     public CompletableFuture<List<Map<String, Object>>> update(String table, Map<String, Object> data,
             FindOptions options, boolean noSelectQuery) {
-        return CompletableFuture.supplyAsync(() -> {
-            try {
-                return updateSync(table, data, options, noSelectQuery);
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw new RuntimeException(e);
-            }
-        });
+        if (executor == null) {
+            return CompletableFuture.supplyAsync(() -> {
+                try {
+                    return updateSync(table, data, options, noSelectQuery);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new RuntimeException(e);
+                }
+            });
+        } else {
+            return CompletableFuture.supplyAsync(() -> {
+                try {
+                    return updateSync(table, data, options, noSelectQuery);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new RuntimeException(e);
+                }
+            }, executor);
+        }
     }
 
     public int destroySync(String table) throws SQLException {
@@ -557,14 +640,25 @@ public class Sequelize {
     }
 
     public CompletableFuture<Integer> destroy(String table, FindOptions options) {
-        return CompletableFuture.supplyAsync(() -> {
-            try {
-                return destroySync(table, options);
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw new RuntimeException(e);
-            }
-        });
+        if (executor == null) {
+            return CompletableFuture.supplyAsync(() -> {
+                try {
+                    return destroySync(table, options);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new RuntimeException(e);
+                }
+            });
+        } else {
+            return CompletableFuture.supplyAsync(() -> {
+                try {
+                    return destroySync(table, options);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new RuntimeException(e);
+                }
+            }, executor);
+        }
     }
 
     public long countSync(String table) throws SQLException {
@@ -588,14 +682,25 @@ public class Sequelize {
     }
 
     public CompletableFuture<Long> count(String table, FindOptions options) {
-        return CompletableFuture.supplyAsync(() -> {
-            try {
-                return countSync(table, options);
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw new RuntimeException(e);
-            }
-        });
+        if (executor == null) {
+            return CompletableFuture.supplyAsync(() -> {
+                try {
+                    return countSync(table, options);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new RuntimeException(e);
+                }
+            });
+        } else {
+            return CompletableFuture.supplyAsync(() -> {
+                try {
+                    return countSync(table, options);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new RuntimeException(e);
+                }
+            }, executor);
+        }
     }
 
     public int maxSync(String table, String column) throws SQLException {
@@ -612,14 +717,25 @@ public class Sequelize {
     }
 
     public CompletableFuture<Integer> max(String table, String column, FindOptions options) {
-        return CompletableFuture.supplyAsync(() -> {
-            try {
-                return maxSync(table, column, options);
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw new RuntimeException(e);
-            }
-        });
+        if (executor == null) {
+            return CompletableFuture.supplyAsync(() -> {
+                try {
+                    return maxSync(table, column, options);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new RuntimeException(e);
+                }
+            });
+        } else {
+            return CompletableFuture.supplyAsync(() -> {
+                try {
+                    return maxSync(table, column, options);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new RuntimeException(e);
+                }
+            }, executor);
+        }
     }
 
     public int minSync(String table, String column) throws SQLException {
@@ -636,14 +752,25 @@ public class Sequelize {
     }
 
     public CompletableFuture<Integer> min(String table, String column, FindOptions options) {
-        return CompletableFuture.supplyAsync(() -> {
-            try {
-                return minSync(table, column, options);
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw new RuntimeException(e);
-            }
-        });
+        if (executor == null) {
+            return CompletableFuture.supplyAsync(() -> {
+                try {
+                    return minSync(table, column, options);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new RuntimeException(e);
+                }
+            });
+        } else {
+            return CompletableFuture.supplyAsync(() -> {
+                try {
+                    return minSync(table, column, options);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new RuntimeException(e);
+                }
+            }, executor);
+        }
     }
 
     public List<Map<String, Object>> incrementSync(String table, Map<String, Object> data)
@@ -689,14 +816,25 @@ public class Sequelize {
 
     public CompletableFuture<List<Map<String, Object>>> increment(String table, Map<String, Object> data,
             FindOptions options) {
-        return CompletableFuture.supplyAsync(() -> {
-            try {
-                return incrementSync(table, data, options);
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw new RuntimeException(e);
-            }
-        });
+        if (executor == null) {
+            return CompletableFuture.supplyAsync(() -> {
+                try {
+                    return incrementSync(table, data, options);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new RuntimeException(e);
+                }
+            });
+        } else {
+            return CompletableFuture.supplyAsync(() -> {
+                try {
+                    return incrementSync(table, data, options);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new RuntimeException(e);
+                }
+            }, executor);
+        }
     }
 
     public FindAndCountResult findAndCountAllSync(String table) throws SQLException {
@@ -733,14 +871,25 @@ public class Sequelize {
     }
 
     public CompletableFuture<FindAndCountResult> findAndCountAll(String table, FindOptions options, ICallBack icb) {
-        return CompletableFuture.supplyAsync(() -> {
-            try {
-                return findAndCountAllSync(table, options, icb);
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw new RuntimeException(e);
-            }
-        });
+        if (executor == null) {
+            return CompletableFuture.supplyAsync(() -> {
+                try {
+                    return findAndCountAllSync(table, options, icb);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new RuntimeException(e);
+                }
+            });
+        } else {
+            return CompletableFuture.supplyAsync(() -> {
+                try {
+                    return findAndCountAllSync(table, options, icb);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new RuntimeException(e);
+                }
+            }, executor);
+        }
     }
 
     public Connection transactionSync() throws SQLException {
@@ -763,25 +912,47 @@ public class Sequelize {
     }
 
     public CompletableFuture<Object> transaction(ITransCb icb) {
-        return CompletableFuture.supplyAsync(() -> {
-            try {
-                return transactionSync(icb);
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw new RuntimeException(e);
-            }
-        });
+        if (executor == null) {
+            return CompletableFuture.supplyAsync(() -> {
+                try {
+                    return transactionSync(icb);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new RuntimeException(e);
+                }
+            });
+        } else {
+            return CompletableFuture.supplyAsync(() -> {
+                try {
+                    return transactionSync(icb);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new RuntimeException(e);
+                }
+            }, executor);
+        }
     }
 
     public CompletableFuture<Connection> transaction() {
-        return CompletableFuture.supplyAsync(() -> {
-            try {
-                return transactionSync();
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw new RuntimeException(e);
-            }
-        });
+        if (executor == null) {
+            return CompletableFuture.supplyAsync(() -> {
+                try {
+                    return transactionSync();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new RuntimeException(e);
+                }
+            });
+        } else {
+            return CompletableFuture.supplyAsync(() -> {
+                try {
+                    return transactionSync();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new RuntimeException(e);
+                }
+            }, executor);
+        }
     }
 
     public Optional<Map<String, Object>> findOneAndUpdateSync(String table, FindOptions options,
@@ -802,14 +973,25 @@ public class Sequelize {
 
     public CompletableFuture<Optional<Map<String, Object>>> findOneAndUpdate(String table, FindOptions options,
             Map<String, Object> data) {
-        return CompletableFuture.supplyAsync(() -> {
-            try {
-                return findOneAndUpdateSync(table, options, data);
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw new RuntimeException(e);
-            }
-        });
+        if (executor == null) {
+            return CompletableFuture.supplyAsync(() -> {
+                try {
+                    return findOneAndUpdateSync(table, options, data);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new RuntimeException(e);
+                }
+            });
+        } else {
+            return CompletableFuture.supplyAsync(() -> {
+                try {
+                    return findOneAndUpdateSync(table, options, data);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new RuntimeException(e);
+                }
+            }, executor);
+        }
     }
 
     public Optional<Map<String, Object>> findOneAndDestroySync(String table, FindOptions options)
@@ -828,13 +1010,24 @@ public class Sequelize {
     }
 
     public CompletableFuture<Optional<Map<String, Object>>> findOneAndDestroy(String table, FindOptions options) {
-        return CompletableFuture.supplyAsync(() -> {
-            try {
-                return findOneAndDestroySync(table, options);
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw new RuntimeException(e);
-            }
-        });
+        if (executor == null) {
+            return CompletableFuture.supplyAsync(() -> {
+                try {
+                    return findOneAndDestroySync(table, options);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new RuntimeException(e);
+                }
+            });
+        } else {
+            return CompletableFuture.supplyAsync(() -> {
+                try {
+                    return findOneAndDestroySync(table, options);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new RuntimeException(e);
+                }
+            }, executor);
+        }
     }
 }
